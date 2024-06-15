@@ -1,13 +1,14 @@
 <template>
-  <div>
+  <div class="input_div">
     <input
+      class="todo_input"
       type="text"
       @change="todoChange"
       v-bind:value="todoText"
       placeholder="Enter your todo Item"
     />
 
-    <button @click="addTodoInput(todoText)">Create Todo</button>
+    <button id="input_button" @click="addTodoInput(todoText)">Create Todo</button>
   </div>
 </template>
 
@@ -42,4 +43,21 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.input_div {
+  margin: auto;
+  width: 70%;
+  padding: 10px;
+}
+input.todo_input {
+  width: 350px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 3px solid #555;
+  border-radius: 8%;
+}
+
+#input_button {
+  background-color: rgb(54, 106, 54);
+}
+</style>

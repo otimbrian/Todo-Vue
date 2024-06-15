@@ -72,16 +72,29 @@ const store = createStore({
         mark_done(state, todo) {
             // state.ttodos = state.todos;
             // state.completed = state.completed == true ? false : true;
-            let req = state.todos.find((t) => t.id === todo.id);
-            req = {
-                ...req, title: req.title.split('').map(char => char + '\u0336').join(''), done: !todo.done
+            // let req = state.todos.find((t) => t.id === todo.id);
+            if (!todo.done) {
+
+                console.log(todo)
+                let req = {
+                    ...todo, title: todo.title.split('').map(char => char + '\u0336').join(''), done: !todo.done
+                }
+
+                const index = state.todos.findIndex((t) => t.id === todo.id)
+                if (index !== -1) {
+                    state.todos[index] = req
+                }
             }
+            else {
+                let req = {
+                    ...todo, title: todo.title.replace(/[\u0336]/g, ''), done: !todo.done
+                }
 
-            state.todos = state.todos.forEach(t => {
-                t.id !== todo.id ? todo : req
-            })
-
-            console.log(state.todos)
+                const index = state.todos.findIndex((t) => t.id === todo.id)
+                if (index !== -1) {
+                    state.todos[index] = req
+                }
+            }
         }
     },
 });
